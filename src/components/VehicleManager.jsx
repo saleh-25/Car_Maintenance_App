@@ -1,6 +1,6 @@
 // src/components/VehicleManager.jsx
 import React, { useState } from 'react';
-import './VehicleManager.css';
+import '../../styles/components/VehicleManager.css';
 
 function VehicleManager() {
   // State to store the list of vehicles

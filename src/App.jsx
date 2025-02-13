@@ -12,6 +12,7 @@ import MileageTracking from './pages/MileageTracking';
 import ServiceHistory from './pages/ServiceHistory';
 import PushNotifications from './pages/PushNotifications';
 import LocalServices from './pages/LocalServices';
+import SignIn from './pages/SignIn';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/service-history" element={<ServiceHistory />} />
           <Route path="/push-notifications" element={<PushNotifications />} />
           <Route path="/local-services" element={<LocalServices />} />
+          <Route path="/sign-in" element={<SignIn />} />
         </Routes>
       </div>
     </div>
