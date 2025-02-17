@@ -1,34 +1,11 @@
 // src/pages/Home.jsx
-import React, { useRef } from 'react';
-import VehicleManager from '../components/VehicleManager';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
-  // Create a ref for the Vehicle Manager section
-  const vehicleManagerRef = useRef(null);
-
-  // Function to scroll to VehicleManager and force it to expand
-  const scrollToVehicleManager = () => {
-    if (vehicleManagerRef.current) {
-      // Scroll smoothly to the Vehicle Manager section
-      vehicleManagerRef.current.scrollIntoView({ behavior: 'smooth' });
-      // Wait a moment for the scroll to finish, then simulate a click on the collapsed view to expand it
-      setTimeout(() => {
-        const collapsedElement = vehicleManagerRef.current.querySelector('.collapsed-view');
-        if (collapsedElement) {
-          collapsedElement.click();
-        }
-      }, 500); // Adjust delay as needed
-    }
-  };
-
   return (
     <div className="home-page">
-      {/* Vehicle Manager Section */}
-      <div ref={vehicleManagerRef} id="vehicle-manager-section">
-        <VehicleManager />
-      </div>
-
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-overlay">
@@ -56,13 +33,13 @@ function Home() {
         <div className="highlight">
           <h3>Service History</h3>
           <p>
-            Log your past services and repairs, ensuring you have a complete maintenance record at your fingertips.
+            Log your past services and repairs to keep a complete record of your vehicle’s history.
           </p>
         </div>
         <div className="highlight">
           <h3>Find Local Mechanics</h3>
           <p>
-            Enter your zipcode to discover nearby mechanic shops on an interactive map.
+            Enter your zipcode to discover local mechanic shops on an interactive map.
           </p>
         </div>
       </section>
@@ -73,8 +50,10 @@ function Home() {
         <p>
           Add your vehicle to our platform and let us handle the reminders and tracking so you can focus on the road ahead.
         </p>
-        <button className="cta-button" onClick={scrollToVehicleManager}>
-          Add Your Vehicle
+        <button className="cta-button">
+          <Link to="/vehicle-manager" style={{ textDecoration: 'none', color: 'inherit' }}>
+            Add Your Vehicle
+          </Link>
         </button>
       </section>
     </div>

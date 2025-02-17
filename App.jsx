@@ -12,16 +12,15 @@ import MileageTracking from './pages/MileageTracking';
 import ServiceHistory from './pages/ServiceHistory';
 import PushNotifications from './pages/PushNotifications';
 import LocalServices from './pages/LocalServices';
-import SignIn from './pages/SignIn';
 
 function App() {
   return (
     <div>
       <NavBar />
-      <VehicleManager />
       <div className="container" style={{ padding: '1rem' }}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/vehicle-manager" element={<VehicleManager />} />
           <Route path="/oil-change" element={<OilChange />} />
           <Route path="/fluid-maintenance" element={<FluidMaintenance />} />
           <Route path="/service-intervals" element={<ServiceIntervals />} />
@@ -29,8 +28,6 @@ function App() {
           <Route path="/service-history" element={<ServiceHistory />} />
           <Route path="/push-notifications" element={<PushNotifications />} />
           <Route path="/local-services" element={<LocalServices />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/vehicle-manager" element={<VehicleManager />} />
         </Routes>
       </div>
     </div>
