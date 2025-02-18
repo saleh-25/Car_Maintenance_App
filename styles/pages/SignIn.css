@@ -50,6 +50,10 @@
   margin-bottom: 10px;
 }
 
+.user-message,.pass-message{
+  color: red;
+  font-size: 80%;
+}
 @keyframes fadeOut {
   0% {
     opacity: 1;

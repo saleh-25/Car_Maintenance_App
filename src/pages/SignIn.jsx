@@ -6,8 +6,8 @@ import '../../styles/pages/SignIn.css'
 
 function SignIn(props){
     const navigate = useNavigate();
-    const user = useRef();
-    const pass = useRef();
+    const [user,setUser] = useState("");
+    const [pass,setPass] = useState("");
     const [loginMessage,setLoginMessage] = useState();
 
     // Attach event listener once for loginMessage animation
@@ -20,13 +20,43 @@ function SignIn(props){
       if (element) {
         element.addEventListener("animationend", handleAnimationEnd);
       }
-    },[]); 
+    },[]);
+    
+    //NO SPECIAL CHARACTER CHECKING
+    useEffect(()=>{
+      const userLower = user.toLowerCase();
+      const passLower = pass.toLowerCase();
+      let userSpecialCharacters = false;
+      let passSpecialCharacters = false;
+      for (let i = 0; i < user.length;i++){
+        //allows ! or space, 
+        if ((userLower.charCodeAt(i) < 48  && userLower.charCodeAt(i) != 32 && userLower.charCodeAt(i) != 33) || (userLower.charCodeAt(i) > 57 && userLower.charCodeAt(i) < 97) || (userLower.charCodeAt(i) > 122)){
+          userSpecialCharacters = true;
+        }
+      }
+      for (let i = 0; i < pass.length;i++){
+        //allows ! or space, 
+        if ((passLower.charCodeAt(i) < 48  && passLower.charCodeAt(i) != 32 && passLower.charCodeAt(i) != 33) || (passLower.charCodeAt(i) > 57 && passLower.charCodeAt(i) < 97) || (passLower.charCodeAt(i) > 122)){
+          passSpecialCharacters = true;
+        }
+      }
+      if (userSpecialCharacters){
+        document.querySelector(".user-message").innerText = "No special characters allowed!"
+      }else{
+        document.querySelector(".user-message").innerText = ""
+      }
+      if (passSpecialCharacters){
+        document.querySelector(".pass-message").innerText = "No special characters allowed!"
+      }else{
+        document.querySelector(".pass-message").innerText = ""
+      }
+    },[user,pass]);
 
     //Validate user login (backend interaction)
     //update loginMessage
     async function handleSubmit(){
       document.querySelector('.login-msg').classList.add("fade-in-out")
-      let result = await checkUser(user.current.value,pass.current.value);
+      let result = await checkUser(user,pass);
       
       if (typeof(result) === "object"){
         props.loginstatusChange();
@@ -34,10 +64,15 @@ function SignIn(props){
         setLoginMessage("Logged In!")
       }else{
         setLoginMessage(result.trim())
-      }
-      
+      } 
     }
 
+    function handleUser(event){
+      setUser(event.target.value);
+    }
+    function handlePass(event){
+      setPass(event.target.value);
+    }
   return(
     <>
       <div className='page'>
@@ -47,12 +82,20 @@ function SignIn(props){
           </div>
           <div className="login-user">
             Username/Email <br/>
-            <input ref={user} type="text"></input>
+            <input type="text" onChange={handleUser}></input>
+            <div className='user-message'>
+              user
+            </div>
           </div>
+
           <div className="login-pass">
             Password <br/>
-            <input ref={pass} type="text"></input>
+            <input type="text" onChange={handlePass}></input>
+            <div className='pass-message'>
+              pass
+            </div>
           </div>
+
           <div className='login-msg'>
             {loginMessage}
           </div>
