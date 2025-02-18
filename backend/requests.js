@@ -3,7 +3,7 @@
 
 // Validate user login/get user data
 async function checkUser(user,pass){
-  const response = await fetch('http://localhost:8000/checkusers',{
+  const response = await fetch('https://car-maintenance-app.onrender.com/checkusers',{
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({user: user, pass: pass})
