@@ -13,7 +13,7 @@ app.post('/checkusers',(req,res) =>{
   const data = req.body;
 
   //Call validate login method in Python Script
-  const pyScript = spawn('python',['backend/dataConnect.py','validLogin',req.body.user,req.body.pass])
+  const pyScript = spawn('python',['dataConnect.py','validLogin',req.body.user,req.body.pass])
 
   //Show output of Python Script. Output is one of:
   // 1) "No user found"
