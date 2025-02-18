@@ -1,6 +1,6 @@
 # Just initializing
 import sqlite3, sys, json
-conn = sqlite3.connect('backend/users.db')
+conn = sqlite3.connect('users.db')
 cursor = conn.cursor()
 
 #checks if it is a valid login
