@@ -3,11 +3,10 @@ import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-le
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Fix default icon paths for Leaflet in React
+//custom map settings
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -41,7 +40,7 @@ function NearestMechanicShops() {
     }
     setLoading(true);
     try {
-      // 1. Geocode the zipcode using Nominatim (with country=us for US zipcodes)
+      // 1. Geocode the zipcode using Nominatim API
       const nominatimUrl = `https://nominatim.openstreetmap.org/search?postalcode=${zipcode}&country=us&format=json&limit=1`;
       const geoResponse = await fetch(nominatimUrl);
       const geoData = await geoResponse.json();

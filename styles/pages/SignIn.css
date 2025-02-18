@@ -1,8 +1,9 @@
+/* General Sign in Page Layout */
 .page{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height:85vh;
   margin: 0;
 }
 .page::after{
@@ -14,10 +15,11 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: -1; 
   position: absolute;
 } 
 
+/* Log In area */
 .login{
   background-color: rgb(218, 206, 204);
   font-family: Arial, Helvetica, sans-serif;
@@ -25,13 +27,14 @@
   flex-direction: column;
   width: 600px;
   height: 600px;
-  border: 1px solid;
+  /* border: 1px solid; */
+  border-radius: 50px;
   padding: 20px;
   box-shadow: 10px 10px hsl(0, 28%, 27%);
   
 }
-/* .card div{ border: 1px solid;} */
 
+/* elements within login area*/
 .login-title{
   font-size: 40px;
   text-align: center;
@@ -44,12 +47,59 @@
 }
 .login-pass{
   font-size: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  99% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.login-msg {
+  font-size: 25px;
+  margin-bottom: 0px;
+}
+
+.fade-in-out {
+  animation: fadeOut 3s forwards;
+}
+
 .login input{
   width: 70%;
   height:25px;
   border-radius: 3px;
+  border: 1px solid #5a3131;
 }
 
+.login-submit{
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px ;
+  background-color: rgb(156, 174, 148);
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(39, 1, 1);
+  transition:  background-color .1s, color .1s ;
+  margin-bottom: 40px;
+}
+.login-submit:hover{
+  background-color: rgb(39, 1, 1);
+  color: rgb(156, 174, 148);
+  cursor: pointer;
+}
+
+.login-footer{
+  color: rgb(39, 1, 1);
+  font-size: 20px;
+}
 

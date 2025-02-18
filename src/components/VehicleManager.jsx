@@ -1,15 +1,11 @@
-// src/components/VehicleManager.jsx
+// src/pages/VehicleManager.jsx
 import React, { useState } from 'react';
-import '../../styles/components/VehicleManager.css';
+import '../../styles/components/VehicleManager.css'; // Adjust the path as needed
 
 function VehicleManager() {
-  // State to store the list of vehicles
   const [vehicles, setVehicles] = useState([]);
-  // State to store the currently selected vehicle
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  // State to control if the panel is expanded or collapsed
   const [isExpanded, setIsExpanded] = useState(false);
-  // State to store the form data for a new vehicle
   const [vehicleData, setVehicleData] = useState({
     make: '',
     model: '',
@@ -18,13 +14,11 @@ function VehicleManager() {
     vin: '',
   });
 
-  // Sample selections for the dropdowns
   const makes = ['Toyota', 'Honda', 'Ford'];
   const models = ['Camry', 'Civic', 'Focus'];
   const years = ['2020', '2021', '2022'];
   const trims = ['Base', 'Sport', 'Premium'];
 
-  // Update form state on input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setVehicleData((prevData) => ({
@@ -33,18 +27,20 @@ function VehicleManager() {
     }));
   };
 
-  // When the form is submitted, add the vehicle to the list
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newVehicle = {
+      ...vehicleData,
+      mileageLog: [], // initialize mileage log as empty
+    };
     setVehicles((prevVehicles) => {
-      const newVehicles = [...prevVehicles, vehicleData];
-      // If there is no selected vehicle, set this as the selected one
+      const newVehicles = [...prevVehicles, newVehicle];
       if (!selectedVehicle) {
-        setSelectedVehicle(vehicleData);
+        setSelectedVehicle(newVehicle);
+        localStorage.setItem('selectedVehicle', JSON.stringify(newVehicle));
       }
       return newVehicles;
     });
-    // Reset the form fields
     setVehicleData({
       make: '',
       model: '',
@@ -54,40 +50,39 @@ function VehicleManager() {
     });
   };
 
-  // Remove a vehicle from the list
   const handleDelete = (index) => {
     setVehicles((prevVehicles) => {
       const updatedVehicles = prevVehicles.filter((_, i) => i !== index);
-      // If the deleted vehicle was the selected vehicle, update the selection
       if (
         selectedVehicle &&
         JSON.stringify(selectedVehicle) === JSON.stringify(prevVehicles[index])
       ) {
-        setSelectedVehicle(updatedVehicles.length > 0 ? updatedVehicles[0] : null);
+        const newSelected = updatedVehicles.length > 0 ? updatedVehicles[0] : null;
+        setSelectedVehicle(newSelected);
+        localStorage.setItem('selectedVehicle', JSON.stringify(newSelected));
       }
       return updatedVehicles;
     });
   };
 
-  // When a vehicle is clicked in the list, set it as the selected vehicle and collapse the panel
   const handleSelect = (vehicle) => {
     setSelectedVehicle(vehicle);
+    localStorage.setItem('selectedVehicle', JSON.stringify(vehicle));
     setIsExpanded(false);
   };
 
-  // Toggle the expanded state
   const toggleExpanded = () => {
     setIsExpanded((prev) => !prev);
   };
 
   return (
     <div className="vehicle-manager">
-      {/* Collapsed view shows only the current vehicle */}
       {!isExpanded ? (
         <div className="collapsed-view" onClick={toggleExpanded}>
           {selectedVehicle ? (
             <div>
-              {selectedVehicle.year} {selectedVehicle.make} {selectedVehicle.model} {selectedVehicle.trim}
+              {selectedVehicle.year} {selectedVehicle.make} {selectedVehicle.model}{' '}
+              {selectedVehicle.trim}
               {selectedVehicle.vin && ` (VIN: ${selectedVehicle.vin})`}
             </div>
           ) : (
@@ -95,7 +90,6 @@ function VehicleManager() {
           )}
         </div>
       ) : (
-        // Expanded view: full UI for managing vehicles
         <div className="expanded-view">
           <div className="header">
             <h3>Manage Vehicles</h3>

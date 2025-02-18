@@ -1,4 +1,3 @@
-// src/pages/LocalServices.jsx
 import React from 'react';
 import NearestMechanicShops from '../components/NearestMechanicShops';
 

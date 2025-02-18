@@ -1,0 +1,62 @@
+/* General Page Layout */
+.page-create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  margin: 0;
+  position: relative;  
+}
+
+.page-create::after {
+  content: "";
+  background-image: url('../../src/assets/images/deadcars.jpg');
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.9;
+  
+  width: 108%; 
+  height: 120%; 
+  
+  z-index: -1;
+  position: absolute;
+}
+/* Within Create Box */
+.create{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  position: absolute;
+  height: 500px;
+  left:400px;
+  right: 400px;
+  font-size: 18px;
+  background-color: rgb(201, 243, 229);
+  border-radius: 30px;
+  padding: 40px;
+}
+
+.create input{
+  margin-bottom: 20px;
+  width: 70%;
+}
+.create select{
+  width: 70%;
+}
+.create-model{
+  margin-bottom: 20px;
+}
+.create-title{
+  font-size: 25px;
+  text-align: center;
+}
+
+.create-submit{
+  margin-inline: 30px;
+  font-size: 25px;
+  border-radius: 10px;
+  border: 1px solid rgb(241, 187, 187);
+  background-color: rgb(242, 211, 250);
+  padding: 10px;
+}
