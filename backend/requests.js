@@ -13,5 +13,31 @@ async function checkUser(user,pass){
   else
     return response.json();
 }
+//Create a user
+async function createUser(user,pass){
+  const response = await fetch('https://car-maintenance-app.onrender.com/createuser',{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({user: user, pass: pass})
+  });
+  const result = await response.json();
+  return result
+}
+
+//Delete a user
+async function deleteUser(user){
+  const response = await fetch('https://car-maintenance-app.onrender.com/deleteuser',{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({user: user})
+  });
+}
+
+//Show entries (debugging)
+async function showEntries(){
+  const response = await fetch('https://car-maintenance-app.onrender.com/entries');
+  console.log(await response.json());
+}
 
 export default checkUser;
+export {createUser, deleteUser, showEntries};

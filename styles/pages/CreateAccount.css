@@ -29,8 +29,7 @@
   border: 1px solid;
   position: absolute;
   height: 500px;
-  left:400px;
-  right: 400px;
+  width: 700px;
   font-size: 18px;
   background-color: rgb(201, 243, 229);
   border-radius: 30px;
@@ -59,4 +58,24 @@
   border: 1px solid rgb(241, 187, 187);
   background-color: rgb(242, 211, 250);
   padding: 10px;
+}
+.create-submit-message{
+
+}
+@keyframes fadeout{
+  0%{
+    opacity: 1;
+    visibility: visible;
+  }
+  99%{
+    opacity: 1;
+    visibility: visible;
+  }
+  100%{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.create-submit-message-animation{
+  animation: fadeout 3s;
 }
