@@ -14,6 +14,7 @@ function BasicBar(props){
 
 function ServiceIntervals() {
   let mileage = localStorage.getItem('selectedVehicle')
+  console.log(mileage)
   mileage = mileage ? JSON.parse(mileage).total_mileage : 0
 
   return (
