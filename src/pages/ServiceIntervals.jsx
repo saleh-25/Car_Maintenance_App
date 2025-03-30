@@ -13,8 +13,9 @@ function BasicBar(props){
 }
 
 function ServiceIntervals() {
-  let mileage = JSON.parse(localStorage.getItem('selectedVehicle')).total_mileage
-  console.log(mileage)
+  let mileage = localStorage.getItem('selectedVehicle')
+  mileage = mileage ? JSON.parse(mileage).total_mileage : 0
+
   return (
     <div>
     <section className={styles.intro}>

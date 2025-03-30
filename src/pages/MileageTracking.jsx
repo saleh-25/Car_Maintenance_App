@@ -16,7 +16,6 @@ function MileageTracking() {
     const vehicleData = localStorage.getItem('selectedVehicle');
     if (vehicleData) {
       const parsed = JSON.parse(vehicleData);
-      parsed.total_mileage = currentMileage
       setSelectedVehicle(parsed);
       if (parsed.mileageLog && parsed.mileageLog.length > 0) {
         setMileageLog(parsed.mileageLog);
