@@ -16,10 +16,17 @@ function MileageTracking() {
     const vehicleData = localStorage.getItem('selectedVehicle');
     if (vehicleData) {
       const parsed = JSON.parse(vehicleData);
+      parsed.total_mileage = currentMileage
       setSelectedVehicle(parsed);
       if (parsed.mileageLog && parsed.mileageLog.length > 0) {
         setMileageLog(parsed.mileageLog);
-        setCurrentMileage(parsed.mileageLog[parsed.mileageLog.length - 1].mileage);
+
+        let sum = 0
+        parsed.mileageLog.map(item =>{
+          sum += item.mileage
+        })
+        setCurrentMileage(sum);
+
       }
     }
   }, []);
@@ -42,14 +49,20 @@ function MileageTracking() {
   //Update Mileage button click
   const handleMileageUpdate = () => {
     const updatedMileage = parseInt(newMileage, 10);
-    if (!isNaN(updatedMileage) && updatedMileage > currentMileage) {
+    if (!isNaN(updatedMileage)) {
       const today = new Date().toLocaleDateString();
       const newEntry = { id: Date.now(), date: today, mileage: updatedMileage };
       const newLog = [...mileageLog, newEntry];
       setMileageLog(newLog);
-      setCurrentMileage(updatedMileage);
       setNewMileage('');
       const updatedVehicle = { ...selectedVehicle, mileageLog: newLog };
+      let sum = newEntry.mileage
+      mileageLog.map(item =>{
+        sum += item.mileage
+      })
+      setCurrentMileage(sum);
+      updatedVehicle.total_mileage = sum
+
       localStorage.setItem('selectedVehicle', JSON.stringify(updatedVehicle));
     } else {
       alert('Please enter a valid mileage that is greater than the current mileage.');
@@ -60,12 +73,14 @@ function MileageTracking() {
   const handleDelete = (id) => {
     const newLog = mileageLog.filter((entry) => entry.id !== id);
     setMileageLog(newLog);
-    if (newLog.length > 0) {
-      setCurrentMileage(newLog[newLog.length - 1].mileage);
-    } else {
-      setCurrentMileage(0);
-    }
+    let sum = 0
+    newLog.map(item =>{
+      sum += item.mileage
+    })
+    setCurrentMileage(sum);
     const updatedVehicle = { ...selectedVehicle, mileageLog: newLog };
+    updatedVehicle.total_mileage = sum
+
     localStorage.setItem('selectedVehicle', JSON.stringify(updatedVehicle));
   };
 
@@ -89,10 +104,14 @@ function MileageTracking() {
       return entry;
     });
     setMileageLog(newLog);
-    if (newLog[newLog.length - 1].id === id) {
-      setCurrentMileage(editedMileage);
-    }
+    let sum = 0
+    newLog.map(item =>{
+      sum += item.mileage
+    })
+    setCurrentMileage(sum);
     const updatedVehicle = { ...selectedVehicle, mileageLog: newLog };
+    updatedVehicle.total_mileage = sum
+
     localStorage.setItem('selectedVehicle', JSON.stringify(updatedVehicle));
     setEditingId(null);
     setEditingMileage('');
@@ -180,7 +199,7 @@ function MileageTracking() {
       {/* Show various statistics */}
       <div className="statistics">
         <h2>Statistics</h2>
-        <p>Average Miles per Month: {avgMilesPerMonth}</p>
+        <p>Average Miles: {currentMileage / mileageLog.length}</p>
       </div>
     </div>
   );

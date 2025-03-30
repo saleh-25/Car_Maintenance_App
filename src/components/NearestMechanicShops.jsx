@@ -102,7 +102,6 @@ function NearestMechanicShops() {
 
   return (
     <div style={{ margin: '1rem' }}>
-      <h2>Find Nearest Mechanic Shops</h2>
       <div>
         <input
           type="text"
@@ -153,6 +152,7 @@ function NearestMechanicShops() {
           </>
         )}
       </div>
+
     </div>
   );
 }

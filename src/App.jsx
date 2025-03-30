@@ -5,10 +5,8 @@ import NavBar from './components/NavBar';
 import VehicleManager from './components/VehicleManager';
 
 import Home from './pages/Home';
-import OilChange from './pages/OilChange';
-import FluidMaintenance from './pages/FluidMaintenance';
-import ServiceIntervals from './pages/ServiceIntervals';
 import MileageTracking from './pages/MileageTracking';
+import ServiceIntervals from './pages/ServiceIntervals';
 import ServiceHistory from './pages/ServiceHistory';
 import PushNotifications from './pages/PushNotifications';
 import LocalServices from './pages/LocalServices';
@@ -17,23 +15,23 @@ import CreateAccount from './pages/CreateAccount';
 
 function App() {
   const navigate = useNavigate();
-  
+  const location = useLocation();  
   //Used to check if a user's logged in.
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const [isLoggedIn,setIsLoggedIn] = useState(false); //TRUE FOR DEBUGGING (no log in screen)
+
   function changeStatus(){
     setIsLoggedIn(true);
   };
+
+  let not_these_routes = location.pathname != '/sign-in' && location.pathname != "/create-account";
 
   return (
     <>
       <NavBar isLoggedIn= {isLoggedIn}/>
       <VehicleManager/>
-      {/* Define routes */}
-      <div className="container" style={{ padding: '1rem' }}>
+      <div className="container" style={{ padding: '1rem', margin:'20px', backgroundColor: not_these_routes ? 'rgb(219, 215, 215)' : undefined}}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/oil-change" element={<OilChange />} />
-            <Route path="/fluid-maintenance" element={<FluidMaintenance />} />
             <Route path="/service-intervals" element={<ServiceIntervals />} />
             <Route path="/mileage-tracking" element={<MileageTracking />} />
             <Route path="/service-history" element={<ServiceHistory />} />

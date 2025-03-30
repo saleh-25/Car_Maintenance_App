@@ -1,12 +1,36 @@
 //MAIN BACKEND FILE
 
-import express from 'express';
-import cors from 'cors';
-import { spawn } from 'child_process';
+const express = require('express');
+const cors = require('cors');
+const { spawn } = require('child_process');
+const webpush = require('web-push');
+const bodyParser = require('body-parser');
+const path = require('path');
+
 
 const app = express();
+
+
 app.use(cors());
 app.use(express.json());  
+app.use(bodyParser.json())
+
+
+const publicVapidKey = "BPRBR3516pFzNP8WufLyCXf2t_ahKLju7MYJgDujqQDmZeenz07sTMcCy_l5uzreTAJU47ZcD4k5fYjWMcP5-64";
+const privateVapidKey = "BWbJ1nA2JoJXNpQn5umkVoSY-yx7ZkQMBAMSL1sT-SA";
+webpush.setVapidDetails("mailto:test@test.com",publicVapidKey,privateVapidKey);
+
+//subscribe to notifications endpoint
+app.post('/subscribe',(req,res) =>{
+  console.log('called')
+
+  // service worker needs subscription and data info
+  const subscription = req.body;
+  const info = JSON.stringify({title: 'Push Test', body: "testing your notification what's up aly, ali, matthew and ahad"});
+
+  // send notification
+  webpush.sendNotification(subscription, info).catch(err => console.error(err));
+});
 
 //Validate user login and/or return user data
 app.post('/checkusers',(req,res) =>{
