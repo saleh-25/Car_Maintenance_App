@@ -1,4 +1,4 @@
-import checkUser from '../../backend/requests';
+import { checkUser } from '../../backend/requests';
 import {useRef,useState,useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/pages/SignIn.css'

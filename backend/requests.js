@@ -86,6 +86,5 @@ async function sendNotification() {
   }
 }
 
-export default checkUser;
-export {createUser, deleteUser, showEntries, setUpNotifications, sendNotification};
+export {checkUser, createUser, deleteUser, showEntries, setUpNotifications, sendNotification};
 

@@ -1,11 +1,10 @@
 //MAIN BACKEND FILE
 
-const express = require('express');
-const cors = require('cors');
-const { spawn } = require('child_process');
-const webpush = require('web-push');
-const bodyParser = require('body-parser');
-const path = require('path');
+import express from 'express';
+import cors from 'cors';
+import { spawn } from 'child_process';
+import webpush from 'web-push';
+import bodyParser from 'body-parser';
 
 
 const app = express();
@@ -22,7 +21,6 @@ webpush.setVapidDetails("mailto:test@test.com",publicVapidKey,privateVapidKey);
 
 //subscribe to notifications endpoint
 app.post('/subscribe',(req,res) =>{
-  console.log('called')
 
   // service worker needs subscription and data info
   const subscription = req.body;
