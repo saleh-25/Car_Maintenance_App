@@ -30,7 +30,7 @@ function AskForHelp() {
     setLoading(true);
     let loaded_reply;
     try {
-      const response = await fetch('http://localhost:8000/groq', {
+      const response = await fetch("https://car-maintenance-app.onrender.com/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function AskForHelp() {
     hasRun.current = false;
   };
   return (
-    <div>
+    <div> 
       <div className={styles.page_container}>
         <div className={styles.history_container}> 
           <h1>Robot Customer Support</h1>
