@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 
 
 const publicVapidKey = "BPRBR3516pFzNP8WufLyCXf2t_ahKLju7MYJgDujqQDmZeenz07sTMcCy_l5uzreTAJU47ZcD4k5fYjWMcP5-64";
-webpush.setVapidDetails("mailto:test@test.com",publicVapidKey,process.env.privateVapidKey);
+webpush.setVapidDetails("mailto:test@test.com",publicVapidKey,"BWbJ1nA2JoJXNpQn5umkVoSY-yx7ZkQMBAMSL1sT-SA");
 
 // ENDPOINTS
 
@@ -136,7 +136,7 @@ app.post('/groq', async (req, res) => {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,// Replace with your actual key
+        'Authorization': `Bearer ${"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"}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

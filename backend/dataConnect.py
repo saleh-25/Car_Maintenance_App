@@ -4,6 +4,7 @@ conn = sqlite3.connect('users.db')
 cursor = conn.cursor()
 
 
+
 #checks if it is a valid login
 def validLogin(username,password):
    cursor.execute(
