@@ -52,6 +52,8 @@ function SignIn(props){
         //log the user in and store their data from backend
         props.changeloginstatus(true);
         props.setusername(user);
+        console.log("username was set???")
+        localStorage.setItem('username',user);
         setUserData(result);
         navigate('/');
         setLoginMessage("Logged In!")
@@ -95,7 +97,6 @@ function SignIn(props){
             <Link to="/">Back to home?</Link>
             <br/>
             <br/>
-            <a href="">Forgot Password?</a><br/>
           </div>
         </div>
       </div>

@@ -25,16 +25,17 @@ function VehicleManager() {
 
   // loads vehicle list from user data
   useEffect(()=>{
-    if (Object.keys(userData).length){
-      const vehicle_list = Object.keys(userData);
-      let new_vehicle_list = [];
-      for (const car of vehicle_list){
-        const vehicle = car.split("_");
-        new_vehicle_list.push({make: vehicle[0], model: vehicle[1], year: vehicle[2]});
+    if (userData){
+      if (Object.keys(userData).length){
+        const vehicle_list = Object.keys(userData);
+        let new_vehicle_list = [];
+        for (const car of vehicle_list){
+          const vehicle = car.split("_");
+          new_vehicle_list.push({make: vehicle[0], model: vehicle[1], year: vehicle[2]});
+        }
+        setVehicles(new_vehicle_list);
       }
-      setVehicles(new_vehicle_list);
-      setVehicleSelected({make: new_vehicle_list[0].make, model: new_vehicle_list[0].model, year: new_vehicle_list[0].year});
-    }
+  }
   },[userData]);
 
   //save vehicle data. update model/year list as necessary

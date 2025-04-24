@@ -56,6 +56,8 @@ function ServiceHistory() {
   // restarts "miles until service" to 0 (on service intervals page) for all in "functionalChanges"
   function updateUserData(entry){
     const key = `${vehicleSelected.make}_${vehicleSelected.model}_${vehicleSelected.year}`
+    const copyofUserData = JSON.parse(JSON.stringify(userData));
+
     for (const change of functionalChanges){
       let category;
       for (const part_category of Object.keys(userData[key])){
@@ -64,11 +66,10 @@ function ServiceHistory() {
           break;
         }
       }
-      const copyofUserData = JSON.parse(JSON.stringify(userData));
       copyofUserData[key][category][change][0] = 0;
-      copyofUserData[key]['service_history'] = [...entries,entry];
-      setUserData(copyofUserData);
     }
+    copyofUserData[key]['service_history'] = [...entries,entry];
+    setUserData(copyofUserData);
   }
 
   // Add service entry when user presses enter for custom input
@@ -111,13 +112,14 @@ function ServiceHistory() {
       'services': services
     };
 
-    setEntries(prev => [entry,...prev]);
+    setEntries(prev => [...prev, entry]);
     setAddEntry(false);
 
     setServices([]);
     setAllowCustomInput(true)
     setFunctionalChanges([]);
 
+    console.log(entry);
     updateUserData(entry);
   }
 

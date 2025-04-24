@@ -14,9 +14,9 @@ async function checkUser(user,pass){
     body: JSON.stringify({user: user, pass: pass})
   });
   if (response.status == 404){
-    return response.text();
+    return await response.text();
   }else{
-    return JSON.parse(await response.text());
+    return await response.json(); 
   }
 }
 
@@ -28,6 +28,7 @@ async function createUser(user,pass){
     body: JSON.stringify({user: user, pass: pass})
   });
   const result = await response.json();
+  console.log(result)
   return result
 }
 
@@ -50,6 +51,7 @@ async function deleteUser(user){
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({user: user})
   });
+  return await response.json()
 }
 
 //Show entries (debugging)

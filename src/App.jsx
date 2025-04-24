@@ -28,12 +28,23 @@ function App() {
   const [saveInfo,setSaveInfo] = useState(false);
   const [activate, setActivate] = useState(null);
 
+  useEffect(()=>{
+    console.log(vehicleSelected);
+  },[vehicleSelected])
+  useEffect(()=>{
+    console.log(userData);
+  },[userData])
+  useEffect(()=>{
+    console.log(username);
+  },[username])
+
   // Get user data on mount if it exists
   useEffect(()=>{
     const stored_user_data = localStorage.getItem("user");
-  
+    
     if (stored_user_data){
-      const parsed_userdata = JSON.parse(stored_user_data)
+      setUsername(localStorage.getItem("username"));
+      const parsed_userdata = JSON.parse(stored_user_data);
       setUserData(parsed_userdata);
       setIsLoggedIn(true);
 
@@ -57,8 +68,20 @@ function App() {
   useEffect(()=>{
     userData && localStorage.setItem("user", JSON.stringify(userData));
     userData && setSaveInfo(true);
-    console.log(userData);
+
+    if (userData && !vehicleSelected){
+      const vehicles = Object.keys(userData);
+      if (vehicles.length){
+        const MakeModelYear = vehicles[0].split("_");
+        setVehicleSelected({
+          make: MakeModelYear[0],
+          model: MakeModelYear[1],
+          year: MakeModelYear[2]
+       });
+      }
+    }
   },[userData])
+
 
   let not_these_routes = location.pathname != '/sign-in' && location.pathname != "/create-account";
   return (

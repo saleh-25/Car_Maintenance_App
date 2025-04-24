@@ -22,6 +22,7 @@ def validLogin(username,password):
       else:
          return "wrong password"
 
+#creates user
 def createUser(username,password):
    cursor.execute(
    "SELECT * FROM users WHERE user = ?",
@@ -32,10 +33,11 @@ def createUser(username,password):
       cursor.execute(
       "INSERT INTO users(user,pass,data) VALUES(?,?,?)",
       (username,password,"{}"))
-      return 1
+      return "created"
    else:
-      return 0
+      return "failed"
    
+# change user data
 def modifyUser(username, data):
     cursor.execute(
         "SELECT * FROM users WHERE user = ?",
@@ -46,10 +48,11 @@ def modifyUser(username, data):
         cursor.execute(
             "UPDATE users SET data = ? WHERE user = ?",
             (data, username))
-        return 1
+        return "modified"
     else:
-        return 0
+        return "failed"
    
+# delete user
 def deleteUser(username):
    cursor.execute(
    "SELECT * FROM users WHERE user = ?",
@@ -57,7 +60,11 @@ def deleteUser(username):
    entry = cursor.fetchone() 
    if (entry):
       cursor.execute("DELETE FROM users WHERE user = ?", (username,))
+      return "deleted"
+   else:
+      return "failed"
 
+# show data entries for debugging
 def showEntries():
    cursor.execute('''
    SELECT * FROM users
@@ -79,9 +86,9 @@ if (sys.argv[1] == 'validLogin'):
 elif (sys.argv[1] == 'createUser'):
    print(createUser(sys.argv[2],sys.argv[3]))
 elif (sys.argv[1] == 'deleteUser'):
-   deleteUser(sys.argv[2])
+   print(deleteUser(sys.argv[2]))
 elif (sys.argv[1] == 'modifyUser'):
-   modifyUser(sys.argv[2], sys.argv[3])
+   print(modifyUser(sys.argv[2], sys.argv[3]))
 elif (sys.argv[1] == 'showEntries'):
    showEntries()
 else:

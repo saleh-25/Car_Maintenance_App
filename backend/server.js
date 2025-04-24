@@ -61,8 +61,12 @@ app.post('/createuser',(req,res)=>{
 
   //Show output of Python Script.
   pyScript.stdout.on('data', (data) => {
-    const result = {'status' : parseInt(data.toString())};
-    res.json(result);
+    const info = data.toString().trim()
+    if (info === "failed"){
+      res.status(404).json({"status":info});
+    }else{
+      res.status(200).json({"status":info});
+    }
   });
   pythonErrorOrEnd(pyScript);
 
@@ -75,8 +79,12 @@ app.delete('/deleteuser',(req,res)=>{
 
   //Show output of Python Script.
   pyScript.stdout.on('data', (data) => {
-    res.status(200).send("success");
-  });
+    const info = data.toString().trim()
+    if (info === "failed"){
+      res.status(404).send({"status":info});
+    }else{
+      res.status(200).send({"status":info});
+    }  });
   pythonErrorOrEnd(pyScript);
 
 })
@@ -88,8 +96,12 @@ app.put('/modifyuser',(req,res)=>{
   const pyScript = spawn('python',['dataConnect.py','modifyUser',req.body.user,req.body.userdata])
   //Show output of Python Script.
   pyScript.stdout.on('data', (data) => {
-    result = {'status' : parseInt(data.toString())};
-    res.status(200).send("success");
+    const info = data.toString().trim()
+    if (info === "failed"){
+      res.status(404).send(info);
+    }else{
+      res.status(200).send(info);
+    }
   });
   pythonErrorOrEnd(pyScript);
 

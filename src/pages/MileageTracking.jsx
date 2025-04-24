@@ -141,6 +141,7 @@ function MileageTracking(props) {
       <h1>Mileage Tracking</h1>
       <div className={styles["vehicle-info"]}>
         <p>
+          {console.log(vehicleSelected)}
           Vehicle: {vehicleSelected.year} {vehicleSelected.make} {vehicleSelected.model}
         </p>
         <h2>Total Mileage: {totalMileage}</h2>
