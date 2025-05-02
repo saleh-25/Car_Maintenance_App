@@ -2,8 +2,8 @@
 
 const publicVapidKey = "BPRBR3516pFzNP8WufLyCXf2t_ahKLju7MYJgDujqQDmZeenz07sTMcCy_l5uzreTAJU47ZcD4k5fYjWMcP5-64";
 
-// const baseURL = "https://car-maintenance-app.onrender.com/" //main
-const baseURL = "http://localhost:8000/"  //debugging
+const baseURL = "https://car-maintenance-app.onrender.com/" //main
+// const baseURL = "http://localhost:8000/"  //debugging
 
 
 // Validate user login/get user data
