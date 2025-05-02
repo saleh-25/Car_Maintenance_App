@@ -5,7 +5,7 @@ import 'aos/dist/aos.css';
 import styles from '../../styles/pages/Home.module.css';
 
 // Home page. The aesthetic landing page and the default directory/page
-function Home() {
+function Home({isLoggedIn}) {
   // Initialize AOS once on component mount
   useEffect(() => {
     AOS.init({ duration: 600 }); //animation duration
@@ -62,9 +62,9 @@ function Home() {
         <Link to="/create-account" className={styles["cta-button"]}>
           Create an account
         </Link>
-        <Link to="/sign-in" className={styles["cta-button"]}>
+        {!isLoggedIn ? <Link to="/sign-in" className={styles["cta-button"]}>
           Sign In
-        </Link>
+        </Link> : null}
       </section>
     </div>
   );

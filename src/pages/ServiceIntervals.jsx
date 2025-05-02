@@ -27,7 +27,6 @@ function ServiceIntervals(props) {
 
   return (
     <div>
-      <button onClick={callAI}>dneudnweidnw</button>
       <section className={styles.intro}>
           <h3>
             Service Intervals

@@ -27,17 +27,7 @@ function App() {
   const [vehicleSelected, setVehicleSelected] = useState(null);
   const [saveInfo,setSaveInfo] = useState(false);
   const [activate, setActivate] = useState(null);
-
-  useEffect(()=>{
-    console.log(vehicleSelected);
-  },[vehicleSelected])
-  useEffect(()=>{
-    console.log(userData);
-  },[userData])
-  useEffect(()=>{
-    console.log(username);
-  },[username])
-
+  
   // Get user data on mount if it exists
   useEffect(()=>{
     const stored_user_data = localStorage.getItem("user");
@@ -92,7 +82,7 @@ function App() {
         {isLoggedIn ? <VehicleManager/> : null}
         <div className="container" style={{ padding: '1rem', margin:'20px', backgroundColor: not_these_routes ? 'rgb(219, 215, 215)' : undefined}}>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
               <Route path="/service-intervals" element={<ServiceIntervals/>} />
               <Route path="/mileage-tracking" element={<MileageTracking/>} />
               <Route path="/service-history" element={<ServiceHistory />} />

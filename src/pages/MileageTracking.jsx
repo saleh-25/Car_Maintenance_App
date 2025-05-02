@@ -58,15 +58,17 @@ function MileageTracking(props) {
 
   // Enter new log entry
   const handleMileageUpdate = () => {
-    if (!isNaN(newMileage) && newMileage !== ""){
-      const today = new Date().toLocaleDateString();
-      const newEntry = { id: Date.now(), date: today, mileage: newMileage };
-      const newLog = [...mileageLog, newEntry];
-      setMileageLog(newLog);
+    if (!isNaN(newMileage) && newMileage !== "" ){
+      if (newMileage > 0 && newMileage < 50000){
+        const today = new Date().toLocaleDateString();
+        const newEntry = { id: Date.now(), date: today, mileage: newMileage };
+        const newLog = [...mileageLog, newEntry];
+        setMileageLog(newLog);
 
-      setNewMileage(0);
-      setTotalMileage(totalMileage + newMileage);
-      addMilesForIntervals(newMileage);
+        setNewMileage(0);
+        setTotalMileage(totalMileage + newMileage);
+        addMilesForIntervals(newMileage);
+      }
     }
   };
 
@@ -141,7 +143,6 @@ function MileageTracking(props) {
       <h1>Mileage Tracking</h1>
       <div className={styles["vehicle-info"]}>
         <p>
-          {console.log(vehicleSelected)}
           Vehicle: {vehicleSelected.year} {vehicleSelected.make} {vehicleSelected.model}
         </p>
         <h2>Total Mileage: {totalMileage}</h2>

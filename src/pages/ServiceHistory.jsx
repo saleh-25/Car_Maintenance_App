@@ -119,7 +119,6 @@ function ServiceHistory() {
     setAllowCustomInput(true)
     setFunctionalChanges([]);
 
-    console.log(entry);
     updateUserData(entry);
   }
 

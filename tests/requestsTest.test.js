@@ -65,7 +65,6 @@ describe("createUser function", () => {
       "status":"created"
     };
     result = await createUser("testUser","testfail");
-    console.log(result)
 
     expect(result).toEqual(expected);
   })

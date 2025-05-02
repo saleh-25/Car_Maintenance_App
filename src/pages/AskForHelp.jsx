@@ -30,7 +30,7 @@ function AskForHelp() {
     setLoading(true);
     let loaded_reply;
     try {
-      const response = await fetch("https://car-maintenance-app.onrender.com/", {
+      const response = await fetch("https://car-maintenance-app.onrender.com/groq", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
