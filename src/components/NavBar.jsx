@@ -12,6 +12,7 @@ function NavBar(props) {
     localStorage.setItem("user","");
     setUserData(null);
     props.changeloginstatus(false);
+    setVehicleSelected(null);
   }
 
   // If user is not logged in, show default navigation bar

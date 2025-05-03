@@ -77,7 +77,7 @@ function App() {
   return (
     <>
       <ThemeContext.Provider value={[vehicleSelected, setVehicleSelected, userData, setUserData, activate, setActivate]}>
-        {saveInfo ? <SaveButton setsaveinfo = {setSaveInfo} username={username}/> : null}
+        {saveInfo && isLoggedIn ? <SaveButton setsaveinfo = {setSaveInfo} username={username}/> : null}
         <NavBar isLoggedIn= {isLoggedIn} changeloginstatus = {setIsLoggedIn}/>
         {isLoggedIn ? <VehicleManager/> : null}
         <div className="container" style={{ padding: '1rem', margin:'20px', backgroundColor: not_these_routes ? 'rgb(219, 215, 215)' : undefined}}>

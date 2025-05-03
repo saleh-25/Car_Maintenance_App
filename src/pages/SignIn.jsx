@@ -90,7 +90,7 @@ function SignIn(props){
           <div className={styles['login-msg']}>
             {loginMessage}
           </div>
-          <button className={styles["login-submit"]} onClick={handleSubmit}> Submit</button>
+          <button className={styles["login-submit"]} onClick={(!passErrorMessage && !userErrorMessage) ? handleSubmit : null}> Submit</button>
           <div className={styles["login-footer"]}>
             Don't have an account?<br/>
             <Link to="/create-account">Create an account</Link><br/>

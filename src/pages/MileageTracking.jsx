@@ -13,9 +13,9 @@ function MileageTracking(props) {
 
   // update mileagelog and total mileage when a new vehicle is selected
   useEffect(()=>{
-    if (vehicleSelected) {
+    if (vehicleSelected && userData) {
       const vehicle_key = `${vehicleSelected.make}_${vehicleSelected.model}_${vehicleSelected.year}`;
-
+      console.log(userData)
       const stored_log = userData[vehicle_key]['mileage_log'];
       setMileageLog(stored_log['mileage_entries']);
       setTotalMileage(stored_log['total_mileage']);
@@ -24,7 +24,7 @@ function MileageTracking(props) {
 
   // update userdata when mileagelog or total mileage changes
   useEffect(()=>{
-    if (vehicleSelected){
+    if (vehicleSelected && userData){
       const vehicle_key = `${vehicleSelected.make}_${vehicleSelected.model}_${vehicleSelected.year}`;
       setUserData((data)=>(
         {
@@ -67,6 +67,7 @@ function MileageTracking(props) {
 
         setNewMileage(0);
         setTotalMileage(totalMileage + newMileage);
+        console.log(userData)
         addMilesForIntervals(newMileage);
       }
     }
