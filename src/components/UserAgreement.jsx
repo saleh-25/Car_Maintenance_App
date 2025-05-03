@@ -121,7 +121,7 @@ Open your preferred browser.
 
 Navigate to the application
 
-Visit the app at: <https://finaliteration3.netlify.app/>
+Visit the app at: <https://carmaintenancechecklist.netlify.app/>
 
 You're all set!
 
