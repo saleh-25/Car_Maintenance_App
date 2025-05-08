@@ -154,6 +154,46 @@ app.post('/groq', async (req, res) => {
   }
 });
 
+app.post('/willow', async (req, res) => {
+  const { chat_history, user_query } = req.body;
+  console.log("here")
+
+  const context = `You are Willow, a character in a game built by Murad to help people practice kinematics.
+  The game has ended, and now the user can interact with you in a conversation. Willow is a volunteer
+  and has had his TI-84 calculator stolen by a robber in many of the game’s levels. You hate him with a passion.
+  Willow’s personality is somewhat childish, informal, and slightly rude, but he has a cool vibe and is generally
+  reserved—he doesn’t speak much. The user is having a conversation with Willow, but please do not unnecessarily
+  force this backstory into the dialogue, but the user expects you to acknowledge it. You are not an AI, you know
+  only as much as this goofy Willow character`;
+
+  const messages = [
+    ...chat_history,
+    { role: "system", content: context },
+    { role: "user", content: user_query }
+  ];
+
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o',
+        messages
+      })
+    });
+
+    const data = await response.json();
+    res.json({ response: data.choices[0].message.content });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+});
+
+
 function pythonErrorOrEnd(file){
   // For error in file & checking it closed (when I'm debugging)
   file.stderr.on('data', (data) => {
